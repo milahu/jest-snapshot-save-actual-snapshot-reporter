@@ -7,6 +7,12 @@ to save actual snapshots to disk, when tests fail
 
 copy [save-actual-snapshot-reporter.js](save-actual-snapshot-reporter.js) to your `test` folder
 
+install `jest-snapshot`
+
+```
+npm install -D jest-snapshot
+```
+
 add to your `jest.config.js`
 
 ```js
