@@ -1,7 +1,7 @@
 # jest-snapshot save actual snapshot reporter
 
 a custom reporter for [jest](https://github.com/facebook/jest)
-to save actual snapshots to disk, when tests fail
+to save actual [snapshots](https://jestjs.io/docs/en/snapshot-testing) to disk, when tests fail
 
 ## usage
 
@@ -50,6 +50,13 @@ for example, `__snapshots__/some-test.test.js.snap` now contains
 exports[`some test 1`] = `46`;
 ```
 
+the ` 1` is appended by [toMatchSnapshot](https://jestjs.io/docs/en/expect#tomatchsnapshotpropertymatchers-hint).
+this can be changed with the `hint` parameter like
+
+```js
+  expect(actualResult).toMatchSnapshot(, 'some better hint');
+```
+
 now change the test, for example
 
 ```diff
@@ -73,16 +80,16 @@ exports[`some test 1`] = `90`;
 to compare expected result and actual result in your script, simply do
 
 ```js
-const actualValueMap = require(
+const actualResultMap = require(
   './__snapshots__/some-test.test.js.actual.js');
 
-const expectedValueMap = require(
+const expectedResultMap = require(
   './__snapshots__/some-test.test.js.snap');
 
 const snapshotId = 'some test 1';
 
-const actualValue = actualValueMap[snapshotId];
-const expectedValue = actualValueMap[snapshotId];
+const actualResult = actualResultMap[snapshotId];
+const expectedResult = expectedResultMap[snapshotId];
 
-console.dir({ snapshotId, actualValue, expectedValue });
+console.dir({ snapshotId, actualResult, expectedResult });
 ```
